@@ -1,0 +1,173 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+  --ink: #0a0a0c;
+  --ink-2: #101014;
+  --bone: #e9e6de;
+  --bone-dim: #9a968c;
+  --amber: #ffa23e;
+  --line: rgba(233, 230, 222, 0.1);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  background: var(--ink);
+}
+
+body {
+  background: var(--ink);
+  color: var(--bone);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  font-feature-settings: "ss01", "cv01";
+}
+
+@media (hover: hover) and (pointer: fine) {
+  body {
+    cursor: none;
+  }
+}
+
+::selection {
+  background: var(--amber);
+  color: #17110a;
+}
+
+::-webkit-scrollbar {
+  width: 9px;
+}
+::-webkit-scrollbar-track {
+  background: var(--ink);
+}
+::-webkit-scrollbar-thumb {
+  background: #2a2a2f;
+  border-radius: 999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--amber);
+}
+
+/* ---------- Utilities ---------- */
+
+/* Monospace technical labels */
+.mono {
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-feature-settings: "zero" 1;
+}
+
+.eyebrow {
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--bone-dim);
+}
+
+/* Chromatic RGB-split display text — the signature */
+.chroma {
+  position: relative;
+  color: var(--bone);
+  text-shadow:
+    var(--split, 2px) 0 0 rgba(255, 46, 99, 0.5),
+    calc(var(--split, 2px) * -1) 0 0 rgba(64, 224, 255, 0.5);
+  transition: text-shadow 0.4s ease;
+}
+.chroma:hover {
+  --split: 5px;
+}
+
+@keyframes converge {
+  0% {
+    --split: 14px;
+    opacity: 0;
+  }
+  100% {
+    --split: 0px;
+    opacity: 1;
+  }
+}
+
+@property --split {
+  syntax: "<length>";
+  initial-value: 0px;
+  inherits: true;
+}
+
+.accent {
+  color: var(--amber);
+}
+
+.panel {
+  background: var(--ink-2);
+  border: 1px solid var(--line);
+}
+
+/* Hairline blueprint grid */
+.grid-bg {
+  background-image:
+    linear-gradient(var(--line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--line) 1px, transparent 1px);
+  background-size: 64px 64px;
+}
+
+/* Ticked frame border that reveals amber on hover */
+.frame {
+  position: relative;
+  border: 1px solid var(--line);
+  transition: border-color 0.35s ease;
+}
+.frame:hover {
+  border-color: rgba(255, 162, 62, 0.45);
+}
+.frame::before,
+.frame::after {
+  content: "";
+  position: absolute;
+  width: 9px;
+  height: 9px;
+  border: 1px solid var(--amber);
+  opacity: 0;
+  transition: opacity 0.35s ease;
+}
+.frame::before {
+  top: -1px;
+  left: -1px;
+  border-right: none;
+  border-bottom: none;
+}
+.frame::after {
+  bottom: -1px;
+  right: -1px;
+  border-left: none;
+  border-top: none;
+}
+.frame:hover::before,
+.frame:hover::after {
+  opacity: 1;
+}
+
+.noise {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  pointer-events: none;
+  opacity: 0.05;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
