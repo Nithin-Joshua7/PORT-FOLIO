@@ -51,7 +51,6 @@ export default function Contact() {
           <Reveal delay={0.2}>
             <p className="mt-6 max-w-lg text-lg text-bone-dim">
               Available for select freelance projects and full-time roles.
-              Currently booking from Q3 2025.
             </p>
           </Reveal>
 
@@ -73,7 +72,8 @@ export default function Contact() {
               >
                 {copied ? (
                   <>
-                    <Check size={16} className="text-amber" /> copied_to_clipboard
+                    <Check size={16} className="text-amber" />{" "}
+                    copied_to_clipboard
                   </>
                 ) : (
                   <>
