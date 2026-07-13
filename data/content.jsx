@@ -27,7 +27,7 @@ export const socials = [
   },
   {
     name: "LinkedIn",
-    href: "https://linkedin.com/in/nithinjoshua",
+    href: "https://www.linkedin.com/in/nithinjosh",
     icon: Linkedin,
   },
   {
